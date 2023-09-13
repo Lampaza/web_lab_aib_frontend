@@ -8,14 +8,14 @@
 
 `curl rgups.ru -I -k -L -s`
 
-Использовал такие ключи как:
+Использовались такие ключи как:
 
 `-I` - Этот ключ указывает отправить только заголовки HTTP-ответа сервера, без тела ответа.  
-`-k` - Этот ключ отключает проверку SSL-сертификата.
+`-k` - Этот ключ отключает проверку SSL-сертификата.  
 `-L` - Этот ключ указывает следовать перенаправлениям при запросе, если сервер возвращает код (301 или 302).  
-`-s` - Этот ключ указывает максимальное количество перенаправлений с помощью Location;
+`-s` - Этот ключ указывает максимальное количество перенаправлений с помощью Location;  
 
-Что получил в итоге: 
+Ответ:
 
 ```shell
 HTTP/1.1 301 Moved Permanently #Статус ответа, который указывает, что запрашиваемый ресурс был перемещен на постоянной основе и содержит новый адрес (URL) 
@@ -44,6 +44,9 @@ Pragma: no-cache #Дополнительный заголовок, которы�
 
 `curl github.com -I -k -L -s`
 
+Ответ:
+
+```shell
 HTTP/1.1 301 Moved Permanently
 Content-Length: 0
 Location: https://github.com/
@@ -68,9 +71,21 @@ Set-Cookie: octo=GH1.1.22200406.1694634541; Path=/; Domain=github.com; Expires=F
 Set-Cookie: logged_in=no; Path=/; Domain=github.com; Expires=Fri, 13 Sep 2024 19:49:01 GMT; HttpOnly; Secure; SameSite=Lax
 Accept-Ranges: bytes #Этот заголовок указывает, что сервер поддерживает диапазоны запросов для данного ресурса.
 X-GitHub-Request-Id: A548:0762:323A68B:32BD932:6502122D* #Этот заголовок содержит идентификатор запроса, который может быть полезен для отслеживания запроса на стороне сервера. 
+```
+
+### РЖД
+
+Скрипт при помощи которого получил информацию о сайте  __[РЖД](https://www.rzd.ru/)__:
 
 `curl rzd.ru -I -k -L -s --User-agent "Yandex"`
 
+Использовал дополнительно такую строку как:
+
+`--User-agent "Yandex"` -  Это строка, которую клиент  отправляет на сервер, чтобы указать серверу, какое программное обеспечение или устройство отправляет запрос.  
+
+Ответ:
+
+```shell
 HTTP/1.1 301 Moved Permanently
 Date: Wed, 13 Sep 2023 20:00:30 GMT
 Content-Type: text/html
@@ -100,9 +115,17 @@ Via: nginx2 #Этот заголовок указывает на прокси-с
 X-Frame-Options: sameorigin
 Set-Cookie: session-cookie=17848dc3c56da89cf9dbb0b218991a240e7fe25db53f0c416d9395ca18348a895d543dc9fc3850d15ddd5e3c55cb8346; Max-Age=86400; Path=/; secure
 X-XSS-Protection: 1; mode=block
+```
+
+### Yandex
+
+Скрипт при помощи которого получил информацию о сайте  __[Яндекс](https://yandex.ru/)__:
 
 `curl yandex.ru -I -k -L -s --User-agent "Yandex"`
 
+Ответ:
+
+```shell
 HTTP/1.1 302 Moved temporarily
 Accept-CH: Sec-CH-UA-Platform-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA, Sec-CH-UA-Full-Version-List, Sec-CH-UA-WoW64, Sec-CH-UA-Arch, Sec-CH-UA-Bitness, Sec-CH-UA-Platform, Sec-CH-UA-Full-Version, Viewport-Width, DPR, Device-Memory, RTT, Downlink, ECT # Строка указывающая на тип принимаемого контента 
 Location: http://yandex.ru/showcaptcha?cc=1&mt=13F61346678342D966528E52A6466D4673C818A6A5768999896EAAB7835BD9EE51CEAE3C8F8D55F8E5FE3EC1084E8444A3526DABF0BDAD38F3299987DB110A90B484B573988E2D6F76E7B86F399708C808CBDBE1B4ED1D441E4D5EABD14242078DA0703BF72896A2AEA916CE8842CF&retpath=aHR0cDovL3lhbmRleC5ydS8__44e6f019dee6b85065dc15f78c1f5767&t=2/1694636013/423e5884d5f366ea92e05ef2054b9cf6&u=f8dbf222-49138c0b-901570f-9168253d&s=38b6fcba1ab2755a3e59a5d0dd7478ad
@@ -127,9 +150,17 @@ X-Content-Type-Options: nosniff
 X-Yandex-Captcha: captcha
 X-Yandex-EU-Request: 0
 X-Yandex-Req-Id: 1694636013092032-867776299076290663-balancer-l7leveler-kubr-yp-sas-114-BAL_
+```
+
+### Python
+
+Скрипт при помощи которого получил информацию о сайте  __[Python](https://www.python.org/)__:
 
 `curl python.org -I -k -L -s`
 
+Ответ:
+
+```shell
 HTTP/1.1 301 Moved Permanently
 Connection: close
 Content-Length: 0
@@ -161,9 +192,17 @@ X-Cache-Hits: 375, 20
 X-Timer: S1694636398.749929,VS0,VE0
 Vary: Cookie
 Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+```
+
+### Git
+
+Скрипт при помощи которого получил информацию о сайте  __[Git](https://git-scm.com/)__:
 
 `curl git-scm.com -I -k -L -s`
 
+Ответ:
+
+```shell
 HTTP/1.1 301 Moved Permanently
 Date: Wed, 13 Sep 2023 20:21:15 GMT
 Connection: keep-alive
@@ -191,9 +230,17 @@ Via: 1.1 vegur
 CF-Cache-Status: REVALIDATED
 Server: cloudflare
 CF-RAY: 80631874dee9d957-HEL
+```
+
+### JetBrains
+
+Скрипт при помощи которого получил информацию о сайте  __[JetBrains](https://www.jetbrains.com/)__:
 
 `curl jetbrains.com -I -k -L -s`
 
+Ответ: 
+
+```shell
 HTTP/1.1 301 Moved Permanently
 Server: CloudFront
 Date: Wed, 13 Sep 2023 20:21:40 GMT
@@ -243,9 +290,17 @@ Set-Cookie: cf_country-region=RU-KDA; Domain=jetbrains.com; Path=/; Secure
 X-Cache: Hit from cloudfront
 X-Amz-Cf-Pop: WAW51-P2
 X-Amz-Cf-Id: 84o3_cTG33d-S9_j8Mct8OK47U_DTmhlLZIoyWUY1BuSItzck4Qn0g==
+```
+
+### VSC
+
+Скрипт при помощи которого получил информацию о сайте  __[VSC](https://code.visualstudio.com/)__:
 
 `curl code.visualstudio.com -I -k -L -s`
 
+Ответ: 
+
+```shell
 HTTP/1.1 307 Temporary Redirect
 Content-Length: 0
 Location: https://code.visualstudio.com/
@@ -267,3 +322,4 @@ X-Powered-By: ASP.NET
 x-azure-ref: 08RkCZQAAAAAPdmeqVmObTIBOV5v3JlcdU1RPRURHRTE0MjEAYmU4N2RjNmQtNDBmOS00NWIwLTg4MTAtOTkxMDg3ZWY4YjI5
 X-Cache: CONFIG_NOCACHE
 Date: Wed, 13 Sep 2023 20:22:08 GMT
+```
