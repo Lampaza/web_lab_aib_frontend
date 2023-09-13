@@ -1,5 +1,23 @@
-$ curl rgups.ru -I -k -L -s #запрос на сайт ргупс с параметрами
+# HTTP HTTPS и их параметры 
+***
+## Лабораторная работа №1
 
+### РГУПС
+
+Скрипт при помощи которого получил информацию о сайте  __[‍РГУПС](https://www.rgups.ru)__: 
+
+`curl rgups.ru -I -k -L -s`
+
+Использовал такие ключи как:
+
+`-I` - Этот ключ указывает отправить только заголовки HTTP-ответа сервера, без тела ответа.  
+`-k` - Этот ключ отключает проверку SSL-сертификата.
+`-L` - Этот ключ указывает следовать перенаправлениям при запросе, если сервер возвращает код (301 или 302).  
+`-s` - Этот ключ указывает максимальное количество перенаправлений с помощью Location;
+
+Что получил в итоге: 
+
+```shell
 HTTP/1.1 301 Moved Permanently #Статус ответа, который указывает, что запрашиваемый ресурс был перемещен на постоянной основе и содержит новый адрес (URL) 
 Server: nginx/1.19.1 #Веб-сервер, обслуживающий запрос, будет использовать программное обеспечение nginx версии 1.19.1.
 Date: Thu, 07 Sep 2023 11:20:47 GMT #Дата и время отправки ответа от сервера  
@@ -18,8 +36,13 @@ Set-Cookie: wire=3f9fa34b1c69a454fc5a9aaac409516a; path=/; HttpOnly; SameSite=La
 Expires: Thu, 19 Nov 1981 08:52:00 GMT #Заголовок управления кэшированием, указывающий, что ресурс истек и не должен храниться в кэше 
 Cache-Control: no-store, no-cache, must-revalidate # Заголовок управления кэшированием, указывающий, что ответ не должен кэшироваться и должен быть повторно подтвержден перед каждым использованием
 Pragma: no-cache #Дополнительный заголовок, который сообщает клиенту, что кэширование данного ответа запрещено
+```
 
-$ curl github.com -I -k -L -s
+### GitHub
+
+Скрипт при помощи которого получил информацию о сайте  __[GitHub](https://github.com/)__:
+
+`curl github.com -I -k -L -s`
 
 HTTP/1.1 301 Moved Permanently
 Content-Length: 0
@@ -46,7 +69,7 @@ Set-Cookie: logged_in=no; Path=/; Domain=github.com; Expires=Fri, 13 Sep 2024 19
 Accept-Ranges: bytes #Этот заголовок указывает, что сервер поддерживает диапазоны запросов для данного ресурса.
 X-GitHub-Request-Id: A548:0762:323A68B:32BD932:6502122D* #Этот заголовок содержит идентификатор запроса, который может быть полезен для отслеживания запроса на стороне сервера. 
 
-$ curl rzd.ru -I -k -L -s --User-agent "Yandex"
+`curl rzd.ru -I -k -L -s --User-agent "Yandex"`
 
 HTTP/1.1 301 Moved Permanently
 Date: Wed, 13 Sep 2023 20:00:30 GMT
@@ -78,7 +101,7 @@ X-Frame-Options: sameorigin
 Set-Cookie: session-cookie=17848dc3c56da89cf9dbb0b218991a240e7fe25db53f0c416d9395ca18348a895d543dc9fc3850d15ddd5e3c55cb8346; Max-Age=86400; Path=/; secure
 X-XSS-Protection: 1; mode=block
 
-$ curl yandex.ru -I -k -L -s --User-agent "Yandex"
+`curl yandex.ru -I -k -L -s --User-agent "Yandex"`
 
 HTTP/1.1 302 Moved temporarily
 Accept-CH: Sec-CH-UA-Platform-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA, Sec-CH-UA-Full-Version-List, Sec-CH-UA-WoW64, Sec-CH-UA-Arch, Sec-CH-UA-Bitness, Sec-CH-UA-Platform, Sec-CH-UA-Full-Version, Viewport-Width, DPR, Device-Memory, RTT, Downlink, ECT # Строка указывающая на тип принимаемого контента 
@@ -105,7 +128,7 @@ X-Yandex-Captcha: captcha
 X-Yandex-EU-Request: 0
 X-Yandex-Req-Id: 1694636013092032-867776299076290663-balancer-l7leveler-kubr-yp-sas-114-BAL_
 
-$ curl python.org -I -k -L -s
+`curl python.org -I -k -L -s`
 
 HTTP/1.1 301 Moved Permanently
 Connection: close
@@ -139,7 +162,7 @@ X-Timer: S1694636398.749929,VS0,VE0
 Vary: Cookie
 Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 
-$ curl git-scm.com -I -k -L -s
+`curl git-scm.com -I -k -L -s`
 
 HTTP/1.1 301 Moved Permanently
 Date: Wed, 13 Sep 2023 20:21:15 GMT
@@ -169,7 +192,7 @@ CF-Cache-Status: REVALIDATED
 Server: cloudflare
 CF-RAY: 80631874dee9d957-HEL
 
-$ curl jetbrains.com -I -k -L -s
+`curl jetbrains.com -I -k -L -s`
 
 HTTP/1.1 301 Moved Permanently
 Server: CloudFront
@@ -221,7 +244,7 @@ X-Cache: Hit from cloudfront
 X-Amz-Cf-Pop: WAW51-P2
 X-Amz-Cf-Id: 84o3_cTG33d-S9_j8Mct8OK47U_DTmhlLZIoyWUY1BuSItzck4Qn0g==
 
-$ curl code.visualstudio.com -I -k -L -s
+`curl code.visualstudio.com -I -k -L -s`
 
 HTTP/1.1 307 Temporary Redirect
 Content-Length: 0
