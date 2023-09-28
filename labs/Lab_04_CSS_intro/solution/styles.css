@@ -1,0 +1,39 @@
+body {
+  width: 100%;
+}
+
+main{
+  margin-top: 200px; 
+  width: 100%;
+}
+
+.block{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  text-align: center;
+}
+
+.inner-block h1, 
+.inner-block h2 {
+  font-size: 31px;
+  margin: 0;
+}
+.inner-block h1{
+  text-transform: uppercase; 
+  font-style: italic
+}
+.inner-block{
+  background-color: skyblue;
+  padding-bottom: 3%;
+}
+
+img{
+  max-width : 50%;
+}
+
+.text p{
+  text-align: center;
+  margin: 0;
+
+}
