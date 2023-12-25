@@ -8,32 +8,39 @@ class TopPayersBlock(BaseXlsBlock):
     def write_header(self):
         self.worksheet.write(self.row, self.col, self.NAME)
 
-    def write_data(self):
-        self.row += 1
-
-        clients = self.data['clients']
-        payments = self.data['payments']
-
+    def process_payments(self):
         quarterly_payments = defaultdict(lambda: defaultdict(float))
-        for payment in payments:
+        for payment in self.data['payments']:
             client_id = payment['client_id']
             amount = payment['amount']
             created_at = datetime.strptime(payment['created_at'], "%Y-%m-%dT%H:%M:%S.%fZ")
             quarter = (created_at.month - 1) // 3 + 1
             quarterly_payments[client_id][quarter] += amount
+        return quarterly_payments
 
-        top_payers = []
-        for client_id, quarterly_data in quarterly_payments.items():
-            total_amount = sum(quarterly_data.values())
-            top_payers.append({'client_id': client_id, 'total_amount': total_amount})
+    def write_data(self):
+        self.row += 1
 
+        clients = self.data['clients']
+        quarterly_payments = self.process_payments()
+
+        top_payers = [{'client_id': client_id, 'total_amount': sum(data.values())} for client_id, data in quarterly_payments.items()]
         top_payers.sort(key=lambda x: x['total_amount'], reverse=True)
         top_payers = top_payers[:10]
 
         for i, payer in enumerate(top_payers, start=1):
             client_info = next(client for client in clients if client['id'] == payer['client_id'])
             fio = client_info['fio']
-            self.worksheet.write(self.row + i, self.col, f"{i}. {fio}: {payer['total_amount']}")
+            
+            
+            last_name, first_name = fio.split(' ', 1)  
+
+            
+            self.worksheet.write(self.row + i, self.col, f"{i}. {last_name}")  
+            self.worksheet.write(self.row + i, self.col + 1, first_name) 
+            
+            self.worksheet.write(self.row + i, self.col + 2, payer['total_amount'])
+
             
 class TopCitiesBlock(BaseXlsBlock):
     NAME = "География клиентов"
@@ -54,7 +61,10 @@ class TopCitiesBlock(BaseXlsBlock):
         top_cities = sorted(city_counts.items(), key=lambda x: x[1], reverse=True)[:10]
 
         for i, (city, count) in enumerate(top_cities, start=1):
-            self.worksheet.write(self.row + i, self.col, f"{i}. {city}: {count} клиентов")
+            
+            self.worksheet.write(self.row + i, self.col, f"{i}. {city}") 
+            self.worksheet.write(self.row + i, self.col + 1, f"{count} клиентов")  
+
 
 class AccountStatusBlock(BaseXlsBlock):
     NAME = "Анализ состояния счёта"
@@ -79,4 +89,11 @@ class AccountStatusBlock(BaseXlsBlock):
         for i, (client_id, balance) in enumerate(top_balances, start=1):
             client_info = next(client for client in clients if client['id'] == client_id)
             fio = client_info['fio']
-            self.worksheet.write(self.row + i, self.col, f"{i}. {fio}: Баланс - {balance}")
+            
+            
+            last_name, first_name = fio.split(' ', 1)  
+
+       
+            self.worksheet.write(self.row + i, self.col, f"{i}. {last_name}")  
+            self.worksheet.write(self.row + i, self.col + 1, first_name) 
+            self.worksheet.write(self.row + i, self.col + 2, f"Баланс - {balance}")  
