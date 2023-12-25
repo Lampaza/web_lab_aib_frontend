@@ -1,18 +1,26 @@
-def build_histogram(text):
-    char_frequency = {}
-    for char in text:
-        if char.isalnum() or char in ",.!?:-;()":
-            char_frequency[char] = char_frequency.get(char, 0) + 1
-    sorted_chars = sorted(char_frequency.keys())
-    for char in sorted_chars:
-        if char == '#':
-            count = char_frequency[char]
-            print(char + " " + "#" * count)
-    for char in sorted_chars:
-        if char != '#':
-            count = char_frequency[char]
-            print(char + " " + "#" * count)
+text_lines = []
+while True:
+    line = input()
+    if not line:
+        break
+    text_lines.append(line)
 
-encrypted_text = input()
+text = '\n'.join(text_lines)
 
-build_histogram(encrypted_text)
+char_count = {}
+maxh = 0
+
+lines = text.split('\n')
+for line in lines:
+    for char in line:
+        if char == ' ':
+            continue
+        char_count[char] = char_count.get(char, 0) + 1
+        maxh = max(maxh, char_count[char])
+
+unique_chars = sorted(char_count.keys())
+
+for i in range(maxh, 0, -1):
+    print(''.join('#' if char_count.get(tt, 0) >= i else ' ' for tt in unique_chars))
+
+print(''.join(unique_chars))

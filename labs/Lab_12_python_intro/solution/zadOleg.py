@@ -1,22 +1,42 @@
-def insert_and_find_median(seq, elem):
-    i = len(seq)
-    while i > 0 and seq[i - 1] > elem:
-        seq.append(seq[i - 1])
-        i -= 1
-    seq.append(elem)
+import heapq
 
-def find_median_sum(n, seq):
-    sorted_seq = []
+def sum_find_median(n, arr):
+    max_heap = [] 
+    min_heap = [] 
     median_sum = 0
-
+    
     for i in range(n):
-        insert_and_find_median(sorted_seq, seq[i])
-        median_sum += (sorted_seq[i // 2] + sorted_seq[(i + 1) // 2]) / (2 - i % 2)
+        heapq.heappush(max_heap, -arr[i])  
+        heapq.heappush(min_heap, -heapq.heappop(max_heap))
+        
+        if len(min_heap) > len(max_heap):
+            heapq.heappush(max_heap, -heapq.heappop(min_heap))  
+        median_sum -= max_heap[0]  
 
     return median_sum
 
-N = int(input())
-X = list(map(int, input().split()))
+def individual_medians(n, arr):
+    max_heap = [] 
+    min_heap = [] 
+    medians = []
 
-result = find_median_sum(N, X)
-print(result)
+    for i in range(n):
+        heapq.heappush(max_heap, -arr[i])  
+        heapq.heappush(min_heap, -heapq.heappop(max_heap))
+        
+        if len(min_heap) > len(max_heap):
+            heapq.heappush(max_heap, -heapq.heappop(min_heap))  
+        
+        median = -max_heap[0] if (i + 1) % 2 == 1 else (min_heap[0] - max_heap[0]) / 2
+        medians.append(int(median))  
+
+    return medians
+
+n = int(input())
+arr = list(map(int, input().split()))
+
+result_sum = sum_find_median(n, arr)
+result_medians = individual_medians(n, arr)
+
+print("Sum:", result_sum)
+print("Medians:", result_medians)
