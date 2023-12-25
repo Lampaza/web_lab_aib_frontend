@@ -32,11 +32,15 @@ def individual_medians(n, arr):
 
     return medians
 
-n = int(input())
-arr = list(map(int, input().split()))
+def main():
+    n = int(input())
+    arr = list(map(int, input().split()))
 
-result_sum = sum_find_median(n, arr)
-result_medians = individual_medians(n, arr)
+    result_sum = sum_find_median(n, arr)
+    result_medians = individual_medians(n, arr)
 
-print("Sum:", result_sum)
-print("Medians:", result_medians)
+    print("Sum:", result_sum)
+    print("Medians:", result_medians)
+
+if __name__ == "__main__":
+    main()
